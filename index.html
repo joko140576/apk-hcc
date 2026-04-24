@@ -21,57 +21,48 @@
         :root{
             --primary:#2563eb;
             --secondary:#06b6d4;
-            --bg:#f4f7fb;
-            --glass:rgba(255,255,255,0.85);
         }
 
         body{
             font-family:'Poppins',sans-serif;
-            background:linear-gradient(180deg,#f4f7fb,#ffffff);
-            color:#1f2937;
+            margin:0;
             overflow-x:hidden;
+            background: radial-gradient(circle at top, #0f172a, #020617);
+            color:#e2e8f0;
+        }
+
+        /* PARTICLE */
+        #tsparticles{
+            position:fixed;
+            width:100%;
+            height:100%;
+            top:0;
+            left:0;
+            z-index:-1;
         }
 
         /* NAVBAR */
         .navbar{
-            background:rgba(255,255,255,0.85);
+            background:rgba(15,23,42,0.75);
             backdrop-filter:blur(12px);
-            box-shadow:0 10px 25px rgba(0,0,0,0.08);
+            border-bottom:1px solid rgba(59,130,246,0.2);
         }
         .navbar-brand{
             font-weight:700;
-            color:var(--primary)!important;
+            color:#3b82f6!important;
         }
         .nav-link{
-            color:#374151!important;
-            font-weight:500;
+            color:#cbd5e1!important;
         }
         .nav-link:hover{
-            color:var(--primary)!important;
+            color:#38bdf8!important;
         }
 
         /* HERO */
-        .hero{margin-top: 100px;
-            min-height:20vh;
-            display:flex;
-            align-items:center;
-        }
         .hero h1{
-            font-size:3.2rem;
-            font-weight:700;
-        }
-        .hero span{
-            color:var(--primary);
-        }
-        .hero p{
-            color:#4b5563;
-        }
-        .hero img{
-            animation:float 6s ease-in-out infinite;
-        }
-        @keyframes float{
-            0%,100%{transform:translateY(0)}
-            50%{transform:translateY(-16px)}
+            background:linear-gradient(90deg,#3b82f6,#06b6d4);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
 
         /* SECTION */
@@ -79,52 +70,80 @@
             padding:120px 0;
         }
 
-        /* CARD */
+        /* CARD FULL VERSION */
         .hcc-card{
-            background:var(--glass);
-            backdrop-filter:blur(10px);
+            background:rgba(15,23,42,0.75);
             border-radius:24px;
             padding:35px;
-            border:1px solid rgba(0,0,0,0.05);
-            box-shadow:0 15px 35px rgba(0,0,0,0.08);
+            border:1px solid rgba(59,130,246,0.25);
+            backdrop-filter:blur(18px);
+            box-shadow:0 10px 30px rgba(0,0,0,0.4);
             transition:0.4s;
+            position:relative;
+            overflow:hidden;
+            transform-style:preserve-3d;
             height:100%;
         }
-        .hcc-card:hover{
-            transform:translateY(-10px);
-            box-shadow:0 20px 40px rgba(37,99,235,0.25);
+
+        .hcc-card::before{
+            content:"";
+            position:absolute;
+            inset:-2px;
+            background:linear-gradient(120deg,#3b82f6,#06b6d4,#3b82f6);
+            filter:blur(14px);
+            opacity:0;
+            transition:0.4s;
+            z-index:-1;
         }
+
+        .hcc-card:hover::before{
+            opacity:1;
+        }
+
+        .hcc-card:hover{
+            transform:translateY(-10px) scale(1.03);
+        }
+
         .hcc-card i{
             font-size:46px;
             margin-bottom:18px;
-            color:var(--primary);
+            color:#3b82f6;
+            transition:0.4s;
+        }
+
+        .hcc-card:hover i{
+            transform:scale(1.2) rotate(8deg);
+            color:#22d3ee;
         }
 
         /* BUTTON */
-        .btn-hcc{
-            background:linear-gradient(135deg,var(--primary),var(--secondary));
+        .btn-primary{
+            background:linear-gradient(135deg,#2563eb,#06b6d4);
             border:none;
-            color:#fff;
             border-radius:50px;
-            padding:14px 36px;
-            font-weight:600;
-        }
-        .btn-hcc:hover{
-            box-shadow:0 0 25px rgba(37,99,235,0.45);
+            box-shadow:0 0 15px rgba(37,99,235,0.5);
         }
 
-        /* FOOTER */
+        .btn-primary:hover{
+            box-shadow:0 0 25px rgba(6,182,212,0.8);
+        }
+
+        p{color:#94a3b8;}
+        h5{color:#f1f5f9;}
+
         footer{
-            background:#f1f5f9;
-            padding:25px;
-            text-align:center;
-            font-size:14px;
+            background:#020617;
             color:#64748b;
+            text-align:center;
+            padding:25px;
         }
     </style>
 </head>
 
 <body>
+
+<!-- PARTICLES -->
+<div id="tsparticles"></div>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg fixed-top">
@@ -133,221 +152,136 @@
             <i class="fa-solid fa-people-group me-2"></i>
             HUMAN CAPITAL & COMPLIANCE
         </a>
-
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="menu">
-            <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#rekrut">Rekrutment</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#dev">Development</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#program">Program HCC</a>
-                </li>
-
-                <!-- DROPDOWN INFORMATION -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       id="navbarInformation"
-                       role="button"
-                       data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Information
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarInformation">
-                        <li>
-                            <a class="dropdown-item" href="https://drive.google.com/file/d/1ZDWmrUFUD_oJIDiWDlt3xwHEHnqQvMfQ/view?usp=sharing">
-                                Program Hris APk
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="kpi.html">
-                                Pengisian KPI 
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="info/pajak.html">
-                                Info Pajak
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="lomba/index.html">
-                               Lomba Ramadhan 1477-H
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-            </ul>
-        </div>
     </div>
 </nav>
 
-
 <!-- PROGRAM -->
 <section id="program" class="section container">
+
     <div class="text-center mb-5" data-aos="fade-up">
         <h1>Platform Digital</h1>
         <p>Inovatif HCC</p>
     </div>
 
-    
-      <div class="row g-4 mb-5">
+    <!-- ROW 1 -->
+    <div class="row g-4 mb-5">
 
         <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
                 <i class="fa-solid fa-chart-line"></i>
-       
-                <h5>Portal Training </h5>
-                <p>Adalah Website/platform online khusus untuk pelatihan atau pembelajaran.</p>
-                <a href="https://portal-training.vercel.app" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <h5>Portal Training</h5>
+                <p>Website/platform online khusus pelatihan</p>
+                <a href="https://portal-training.vercel.app" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
-
 
         <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
-                <i class="fa-solid fa-chart-line"></i>
-       
-                <h5>Portal Rekruitment </h5>
-                <p>Adalah Website/platform online khusus untuk mengelola seluruh proses hiring Pegawai baru</p>
-                <a href="https://portal-rekrutmen.vercel.app" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <i class="fa-solid fa-user-plus"></i>
+                <h5>Portal Rekrutmen</h5>
+                <p>Manajemen proses hiring pegawai</p>
+                <a href="https://portal-rekrutmen.vercel.app" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
 
-
-        <div class="col-md-4" data-aos="flip-left" data-aos-delay="150">
+        <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
                 <i class="fa-solid fa-clipboard-list"></i>
-                <h5>KPI Key Performance Indicator</h5>
-                <p>Pengukuran kinerja berbasis indikator utama yang terukur dan transparan</p>
-                <a href="https://kpi-pegawai.vercel.app/" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <h5>KPI System</h5>
+                <p>Pengukuran kinerja pegawai</p>
+                <a href="https://kpi-pegawai.vercel.app/" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
-      </div>
 
+    </div>
 
-     <div class="row g-4 mb-5">
+    <!-- ROW 2 -->
+    <div class="row g-4 mb-5">
 
         <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
                 <i class="fa-solid fa-chart-line"></i>
-       
                 <h5>WOLA</h5>
-                <p>WorkLoad Analysis. Analisis beban kerja guna memastikan tugas terlaksana secara efektif dan efisien . Dipakai untuk pegawai kantor Pusat </p>
-                <a href="https://timecard-ssi.vercel.app" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <p>Workload Analysis pegawai kantor pusat</p>
+                <a href="https://timecard-ssi.vercel.app" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
- 
 
-        <div class="col-md-4" data-aos="flip-left" data-aos-delay="300">
+        <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
                 <i class="fa-solid fa-trophy"></i>
-                <h5>Polling Best Employee</h5>
-                <p>Polling untuk mencari  pegawai berprestasi atas dedikasi dan kinerja terbaik</p>
-                <a href="https://best-employee.vercel.app/" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <h5>Best Employee</h5>
+                <p>Polling pegawai berprestasi</p>
+                <a href="https://best-employee.vercel.app/" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
-   
+
         <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
                 <i class="fa-solid fa-mosque"></i>
-                <h5>Pajero </h5>
-                <p>Informasi mengenai Pajero ( Perjalanan Rohani ) </p>
-                <a href="https://pajero-ssi.vercel.app/" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <h5>Pajero</h5>
+                <p>Program perjalanan rohani</p>
+                <a href="https://pajero-ssi.vercel.app/" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
 
-      </div>
+    </div>
 
+    <!-- ROW 3 -->
+    <div class="row g-4 mb-5">
 
-      <div class="row g-4 mb-5">
-        
-        <div class="col-md-4" data-aos="flip-left" data-aos-delay="150">
+        <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
                 <i class="fa-solid fa-microphone"></i>
-                <h5>Open Chanel</h5>
-                <p>Ruang terbuka untuk menyampaikan ide, saran, dan kritik membangun</p>
-                <a href="https://openchannel-ssi.vercel.app/" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <h5>Open Channel</h5>
+                <p>Forum ide & kritik</p>
+                <a href="https://openchannel-ssi.vercel.app/" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
 
         <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
                 <i class="fa-solid fa-pause"></i>
-                <h5>Masa Jeda Pegawai </h5>
-                <p>Portal digital untuk pengelolaan proses masa jeda pegawai</p>
-                <a href="https://masajeda.vercel.app/" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <h5>Masa Jeda</h5>
+                <p>Manajemen masa jeda pegawai</p>
+                <a href="https://masajeda.vercel.app/" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
-        </div>  
+        </div>
 
-        <div class="col-md-4" data-aos="flip-left" data-aos-delay="150">
+        <div class="col-md-4" data-aos="flip-left">
             <div class="hcc-card text-center">
                 <i class="fa-solid fa-arrows-spin"></i>
-                <h5>Evaluasi 360 degree</h5>
-                <p>System Penilaian menyeluruh dari atasan, rekan kerja, dan diri sendiri.</p>
-                <a href="https://ssi360.vercel.app/" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <h5>360 Evaluation</h5>
+                <p>Penilaian multi sumber</p>
+                <a href="https://ssi360.vercel.app/" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
 
-      </div>
+    </div>
 
-      <div class="row g-4 mb-5">
-
-        <div class="col-md-6" data-aos="flip-left" data-aos-delay="300">
-            <div class="hcc-card text-center">
-                <i class="fa-solid fa-lightbulb"></i>
-                <h5> Kamus SSI </h5>
-                <p>Kamus SSI disusun sebagai referensi istilah atau terminologi di lingkungan SSI</p>
-                <a href="https://kamus-ssi.vercel.app//" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
-            </div>
-        </div>
-  
+    <!-- ROW 4 -->
+    <div class="row g-4">
 
         <div class="col-md-6" data-aos="flip-left">
             <div class="hcc-card text-center">
-               <i class="fa-solid fa-magnifying-glass-chart"></i>
-                <h5> Checker </h5>
-                <p>Checker memudahkan pencarian dan pemantauan status pegawai bermasalah maupun yang telah resign</p>
-                <a href="https://checker-hcc.vercel.app/" class="btn btn-primary mt-3">
-                    Lihat Detail
-                </a>
+                <i class="fa-solid fa-lightbulb"></i>
+                <h5>Kamus SSI</h5>
+                <p>Referensi istilah internal SSI</p>
+                <a href="https://kamus-ssi.vercel.app/" class="btn btn-primary mt-3">Lihat Detail</a>
             </div>
         </div>
 
-             
+        <div class="col-md-6" data-aos="flip-left">
+            <div class="hcc-card text-center">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                <h5>Checker</h5>
+                <p>Monitoring status pegawai</p>
+                <a href="https://checker-hcc.vercel.app/" class="btn btn-primary mt-3">Lihat Detail</a>
+            </div>
+        </div>
+
     </div>
-    
+
 </section>
 
 <!-- FOOTER -->
@@ -355,14 +289,47 @@
     © 2026 Human Capital Center | Powered by HCC Digital
 </footer>
 
-<!-- JS -->
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
 <script>
-    AOS.init({
-        duration:1200,
-        once:true
+AOS.init({ duration:1200, once:true });
+
+tsParticles.load("tsparticles", {
+    particles:{
+        number:{value:70},
+        color:{value:"#3b82f6"},
+        links:{
+            enable:true,
+            distance:150,
+            color:"#3b82f6",
+            opacity:0.3
+        },
+        move:{enable:true,speed:1},
+        size:{value:2}
+    }
+});
+
+/* 3D HOVER */
+document.querySelectorAll('.hcc-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+        let r=card.getBoundingClientRect();
+        let x=e.clientX-r.left;
+        let y=e.clientY-r.top;
+
+        card.style.transform=
+        `rotateX(${-(y-r.height/2)/20}deg)
+         rotateY(${(x-r.width/2)/20}deg)
+         translateY(-10px)
+         scale(1.03)`;
     });
+
+    card.addEventListener('mouseleave',()=>{
+        card.style.transform="rotateX(0) rotateY(0) scale(1)";
+    });
+});
 </script>
 
 </body>
